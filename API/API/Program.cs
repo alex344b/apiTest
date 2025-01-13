@@ -20,10 +20,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+IConfiguration Configuration = builder.Configuration;
+
+string connectionString = Configuration.GetConnectionString("DefaultConnection")
+                          ?? Environment.GetEnvironmentVariable("DefaultConnection");
+
+
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+    options.UseNpgsql(connectionString));
 
 var app = builder.Build();
 
@@ -33,5 +38,11 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
+
+app.MapGet("/", async context => 
+{
+    context.Response.Redirect("/swagger");
+    await Task.CompletedTask;
+});
 
 app.Run();
