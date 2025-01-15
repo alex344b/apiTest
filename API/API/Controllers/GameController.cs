@@ -36,7 +36,7 @@ public class GameController : ControllerBase
     
     
     [HttpPost("CreateGame")]
-    public async Task<IActionResult> AddGame([FromBody] Game game)
+    public async Task<IActionResult> AddGame([FromQuery] Game game)
     {
         if (game == null)
         {
