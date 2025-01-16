@@ -51,7 +51,7 @@ public class GameController : ControllerBase
         return CreatedAtAction(nameof(GetAllGames), new { id = game.id }, game);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("Update{id}")]
     public async Task<IActionResult> UpdateGame([FromBody] Game game)
     {
         if (game == null || game.id != game.id)
@@ -72,10 +72,10 @@ public class GameController : ControllerBase
     }
 
 
-    [HttpDelete("{id}")]
+    [HttpDelete("Delete{id}")]
     public async Task<IActionResult> DeleteGame([FromRoute] int id)
     {
-        var game = await _databaseContext.Games.FindAsync(id);
+        Game game = await _databaseContext.Games.FindAsync(id);
 
         if (game == null)
         {
@@ -89,7 +89,7 @@ public class GameController : ControllerBase
     }
 
     [HttpPatch("PatchSpecificGame")]
-        public async Task<IActionResult> PatchGameName([FromQuery] string gameName, [FromBody] Game game)
+        public async Task<IActionResult> PatchGameName( string gameName, [FromBody] Game game)
         {
             if (game == null)
             {
