@@ -1,6 +1,10 @@
-﻿version: "3.8"
+﻿version: '3.8'
 services:
-  api:
-    image: api
-    build:
-      context: .
+  webapplication1:
+    image: api_app:latest
+    ports:
+      - "80:80"
+
+    deploy:
+      restart_policy:
+        condition: on-failure
