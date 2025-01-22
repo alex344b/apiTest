@@ -1,6 +1,6 @@
-﻿services:
+﻿version: "3.8"
+services:
   api:
     image: api
     build:
       context: .
-      dockerfile: API/Dockerfile
