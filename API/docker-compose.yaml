@@ -1,7 +1,7 @@
 ﻿version: '3.8'
 services:
   webapplication1:
-    image: api_app:latest
+    image: alexander:api
     ports:
       - "80:80"
 
